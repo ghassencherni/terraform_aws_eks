@@ -30,14 +30,17 @@ KUBECONFIG
   filename = "${var.kubeconfigpath}"
 }
 
-#resource "local_file" "aws_acm_certificate_arn" {
-#  content = <<ARN
-#"${module.security.aws_acm_certificate_arn}"
-#ARN
-#
-#filename = "/root/arn"
-#}
-
 output "wordpress_db_endpoint" {
   value = "${module.rds.wordpress_db_endpoint}"
+}
+
+resource "local_file" "rdsenv" {
+  content = <<RDSENV
+WORDPRESS_DB_HOST = "${module.rds.wordpress_db_endpoint}"
+WORDPRESS_DB_NAME = "${var.dbname}"
+WORDPRESS_DB_PASSWORD = "${var.dbpassword}"
+WORDPRESS_DB_USER = "${var.dbuser}"
+RDSENV
+
+  filename = "rds.env"
 }
