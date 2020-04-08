@@ -12,7 +12,7 @@ variable "private_cidr_subnet" {
   type = "list"
 }
 
-variable "kubeconfigpath" {}
+#variable "kubeconfigpath" {}
 
 variable "identifier" {}
 
