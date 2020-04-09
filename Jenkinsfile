@@ -19,8 +19,6 @@ node {
         sh label: 'terraform apply', script: "export AWS_ACCESS_KEY_ID=${aws_access_key_id};export AWS_SECRET_ACCESS_KEY=${aws_secret_access_key};terraform apply -lock=false -input=false tfplan"
         archiveArtifacts artifacts: 'rds_conn_configmap.yaml, config', followSymlinks: false
     }
-    stage ('Trigger wordpress_k8s')
-      build job: 'wordpress_k8s', parameters: [string(name: 'Action', value: 'Deploy Wordpress'), string(name: 'aws_access_key_id', value: 'AKIAQA3TIL6UOBS6UPPF'), string(name: 'aws_secret_access_key', value: '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')]
   }
     
   if(action == 'Destroy') {
