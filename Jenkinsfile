@@ -17,7 +17,7 @@ node {
     }
     stage('apply') {
         sh label: 'terraform apply', script: "export AWS_ACCESS_KEY_ID=${aws_access_key_id};export AWS_SECRET_ACCESS_KEY=${aws_secret_access_key};terraform apply -lock=false -input=false tfplan"
-        archiveArtifacts artifacts: 'rds_kubeconfig.env, config', followSymlinks: false
+        archiveArtifacts artifacts: 'rds_conn_configmap.yaml, config', followSymlinks: false
     }
   }
 
