@@ -27,7 +27,7 @@ node {
         /* "rds_conn_configmap.yaml" and "config" files are needed to deploy the wordpress EKS cluster, we will used it as artifacts */
         archiveArtifacts artifacts: 'rds_conn_configmap.yaml, config', followSymlinks: false
    
-   /* stage ('Trigger wordpress_k8s') */
+    stage ('Trigger wordpress_k8s') 
 
        /* Once AWS infra is ready ( VPC, RDS, EKS, ..) we will deploy our Wordpress EKS cluster with standard wordpress image */
         build job: 'wordpress_k8s', parameters: [string(name: 'Action', value: 'Deploy Wordpress'), string(name: 'aws_access_key_id', value: '${aws_access_key_id}'), string(name: 'aws_secret_access_key', value: '${aws_secret_access_key}')] 
