@@ -56,7 +56,8 @@ resource "aws_subnet" "wordpress_public_subnet" {
 
   tags {
     Name = "wordpress_public_subnet_${count.index + 1}"
-    "kubernetes.io/role/elb" = "1"
+   # "kubernetes.io/role/elb" = "1"
+    "kubernetes.io/role/internal-elb" = "1"
   }
 }
 
