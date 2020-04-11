@@ -44,7 +44,7 @@ node {
               input(id: "Destroy Gate", message: "Destroy environment?", ok: 'Destroy')
           }
       }
-      */ Trigger wordpress_k8s job in order to destroy the wordpress cluster */
+      /* Trigger wordpress_k8s job in order to destroy the wordpress cluster */
       build job: 'wordpress_k8s', parameters: [string(name: 'Action', value: 'Destroy Wordpress')], quietPeriod: 5
       sh label: 'Destroy environment', script: "terraform apply -lock=false -input=false tfdestroyplan"
     }
