@@ -31,18 +31,6 @@ KUBECONFIG
 }
 
 
-#resource "local_file" "rds_kubeconfig_env" {
-#  content = <<RDSENV
-#KUBECONFIG="../terraform_aws_eks/config"
-#WORDPRESS_DB_HOST="${module.rds.wordpress_db_endpoint}"
-#WORDPRESS_DB_NAME="${var.dbname}"
-#WORDPRESS_DB_PASSWORD="${var.dbpassword}"
-#WORDPRESS_DB_USER="${var.dbuser}"
-#RDSENV
-#
-#  filename = "rds_kubeconfig.env"
-#}
-
 resource "local_file" "rds_conn_configmap" {
   content = <<RDSCONN
 apiVersion: v1

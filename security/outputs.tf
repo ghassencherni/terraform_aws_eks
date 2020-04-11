@@ -1,4 +1,4 @@
-#----security/variables.tf----
+#----security/output.tf----
 
 output "wordpress_public_sg_id" {
   value = "${aws_security_group.wordpress_public_sg.id}"

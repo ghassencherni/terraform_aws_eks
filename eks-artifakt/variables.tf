@@ -1,4 +1,4 @@
-#----
+#----eks-artifakt/variables.tf----
 
 variable "aws_region" {}
 
