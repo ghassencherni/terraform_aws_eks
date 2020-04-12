@@ -49,7 +49,7 @@ node {
     {
       /* Trigger wordpress_k8s job in order to destroy the wordpress cluster 
       build job: 'wordpress_k8s', parameters: [string(name: 'Action', value: 'Destroy Wordpress')], quietPeriod: 5 */
-      sh label: 'Destroy environment', script: "terraform apply -lock=false -input=false tfdestroyplan" 
+      sh label: 'Destroy environment', script: "export AWS_ACCESS_KEY_ID='$ACCESS_KEY';export AWS_SECRET_ACCESS_KEY='$SECRET_ACCESS';terraform apply -lock=false -input=false tfdestroyplan" 
     }
    }
   }
