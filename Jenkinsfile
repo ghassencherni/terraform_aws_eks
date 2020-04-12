@@ -47,8 +47,8 @@ node {
       }
     withCredentials([usernamePassword(credentialsId: 'aws_credential', usernameVariable: 'ACCESS_KEY', passwordVariable: 'SECRET_ACCESS')])
     {
-      /* Trigger wordpress_k8s job in order to destroy the wordpress cluster 
-      build job: 'wordpress_k8s', parameters: [string(name: 'Action', value: 'Destroy Wordpress')], quietPeriod: 5 */
+      /* Trigger wordpress_k8s job in order to destroy the wordpress cluster */
+      build job: 'wordpress_k8s', parameters: [string(name: 'Action', value: 'Destroy Wordpress')], quietPeriod: 5 
       sh label: 'Destroy environment', script: "export AWS_ACCESS_KEY_ID='$ACCESS_KEY';export AWS_SECRET_ACCESS_KEY='$SECRET_ACCESS';terraform apply -lock=false -input=false tfdestroyplan" 
     }
    }
