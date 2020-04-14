@@ -2,8 +2,7 @@
 #
 # EKS Cluster Resources
 #  * IAM Role to allow EKS service to manage other AWS services
-#  * EC2 Security Group to allow networking traffic with EKS cluster
-#  * EKS Cluster
+#  * EKS Cluster and Node group
 #
 
 # POLICIES

@@ -61,6 +61,7 @@ resource "aws_subnet" "wordpress_public_subnet" {
   }
 }
 
+# Associate our public subnets to the public route table 
 resource "aws_route_table_association" "public_rt_assoc" {
   count          = 2
   subnet_id      = "${aws_subnet.wordpress_public_subnet.*.id[count.index]}"
@@ -82,7 +83,7 @@ resource "aws_subnet" "wordpress_private_subnet" {
   }
 }
 
-# Associate our private subnet to the private route table
+# Associate our private subnets to the private route table
 resource "aws_route_table_association" "private_rt_assoc" {
   count          = 2
   subnet_id      = "${aws_subnet.wordpress_private_subnet.*.id[count.index]}"
