@@ -109,3 +109,8 @@ dbname = "wordpressdb"
 - The database instance class 
 
     db_instance_class = "db.t2.small"
+
+
+## Author Information
+
+This script  was created by [Ghassen CHARNI](https://github.com/ghassencherni/)
