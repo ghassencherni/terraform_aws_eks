@@ -48,3 +48,34 @@ RDSCONN
 
   filename = "rds_conn_configmap.yaml"
 }
+
+resource "local_file" "service_wordpress" {
+  content = <<SERVICE
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: wordpress-service
+  annotations:
+    # Note that the backend talks over HTTP.
+    service.beta.kubernetes.io/aws-load-balancer-backend-protocol: http
+    # The ARN of the certificate.
+    service.beta.kubernetes.io/aws-load-balancer-ssl-cert: "${module.security.aws_iam_server_certificate_id}"
+    # Only run SSL on the port named "https" below.
+    service.beta.kubernetes.io/aws-load-balancer-ssl-ports: "https"
+spec:
+  type: LoadBalancer
+  selector:
+    app: wordpress
+  ports:
+  - name: http
+    port: 80
+    targetPort: 80
+  - name: https
+    port: 443
+    targetPort: 80
+
+SERVICE
+
+  filename= "service_wordpress.yaml"
+}

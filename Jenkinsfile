@@ -27,7 +27,7 @@ node {
         sh label: 'terraform apply', script: "export AWS_ACCESS_KEY_ID='$ACCESS_KEY';export AWS_SECRET_ACCESS_KEY='$SECRET_ACCESS';terraform apply -lock=false -input=false tfplan"
 
         /* "rds_conn_configmap.yaml" and "config" files are needed to deploy the wordpress EKS cluster, we will used it as artifacts */
-        archiveArtifacts artifacts: 'rds_conn_configmap.yaml, config'
+        archiveArtifacts artifacts: 'service_wordpress.yaml, rds_conn_configmap.yaml, config'
 
     }
   }

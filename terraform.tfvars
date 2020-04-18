@@ -12,7 +12,6 @@ private_cidr_subnet = [
   "10.0.4.0/24"
 ]
 
-kubeconfigpath = "/root/.kube/config"
 
 identifier = "wordpressdb"
 

@@ -49,3 +49,35 @@ resource "aws_security_group" "wordpress_private_sg" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 }
+
+# Upload a genrated Self Sined Certficate, will be used for ALB HTTPS connection
+# Generates a secure private key and encodes it as PEM, default size here is (2048)
+resource "tls_private_key" "artifakt_private_key" {
+  algorithm   = "RSA"
+}
+
+# Generate the Self Signed Certificate
+resource "tls_self_signed_cert" "artifakt_cert" {
+  key_algorithm   = "RSA"
+  private_key_pem = "${tls_private_key.artifakt_private_key.private_key_pem}"
+
+  subject {
+    common_name  = "amazonaws.com"
+    organization = "ARTIFAKT"
+  }
+
+  validity_period_hours = 12
+
+  allowed_uses = [
+    "key_encipherment",
+    "digital_signature",
+    "server_auth",
+  ]
+}
+
+# Upload the server certificate 
+resource "aws_iam_server_certificate" "artifakt_server_cert" {
+  name             = "some_test_cert"
+  certificate_body = "${tls_self_signed_cert.artifakt_cert.cert_pem}"
+  private_key      = "${tls_private_key.artifakt_private_key.private_key_pem}"
+}
