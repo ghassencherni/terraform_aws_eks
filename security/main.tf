@@ -77,7 +77,7 @@ resource "tls_self_signed_cert" "artifakt_cert" {
 
 # Upload the server certificate 
 resource "aws_iam_server_certificate" "artifakt_server_cert" {
-  name             = "some_test_cert"
+  name             = "artifakt_cert"
   certificate_body = "${tls_self_signed_cert.artifakt_cert.cert_pem}"
   private_key      = "${tls_private_key.artifakt_private_key.private_key_pem}"
 }
